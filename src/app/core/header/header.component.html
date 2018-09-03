@@ -1,0 +1,13 @@
+<nav [class.error]="error">
+  <div>
+    <div class="logo"><a [routerLink]="['']">Dota2Search</a></div>
+  </div>
+  <div *ngIf="error">Steam Service is down. Try agian after a few minutes.</div>
+  <div>
+    <ul>
+      <li>
+        <a [routerLink]="['']">Home</a>
+      </li>
+    </ul>
+  </div>
+</nav>

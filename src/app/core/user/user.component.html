@@ -1,0 +1,7 @@
+<div class="profile" *ngIf="user">
+  <img [src]="user.avatar">
+  <h1> {{ user.username }}</h1>
+  <a [routerLink]="['inventory', user.steamId]">See my inventory</a>
+</div>
+
+<router-outlet></router-outlet>

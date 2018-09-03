@@ -1,0 +1,72 @@
+p {
+    font-size:11px;
+}
+h4 {
+    letter-spacing: 0.130em;
+}
+
+.inventory {
+    margin-top:50px;
+    color:#fff;
+}
+a {
+    display:grid;
+    grid-template-rows: max-content;
+}
+.card {
+   box-shadow: 0 1px 3px 0 white, 0 0 0 1px white;
+   border-radius:5px;
+   overflow:hidden;
+   display:grid;
+}
+ul.inv {
+    list-style: none;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-column-gap:1em;
+}
+
+li {
+    display:flex;
+    position:relative;
+    justify-content: center; 
+    margin-bottom:15px
+}
+h4 {
+    font-size:12px;
+    text-align:center;
+    overflow: hidden;
+    bottom:0;
+    color:#fff;
+    margin: 5px 0px;
+}
+
+.active {
+    font-weight:bold
+}
+
+ul.nav {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+}
+ul.nav li {
+    margin-left:5px
+}
+.container {
+    max-height:300px;
+    width:250px;
+    overflow-y:scroll;
+    position:absolute;
+    z-index:5;
+    background-color:#fff;
+}
+.container img {
+    max-height:24px;
+    max-width:24px;
+}
+.about {
+    padding:15px;
+    display:grid;
+    
+}

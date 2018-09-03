@@ -1,0 +1,20 @@
+nav {
+    top:0;
+    left:0;
+    position:fixed;
+    width:100%;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index:50;
+    color:#fff;
+}
+ul {
+    margin-right:15px;
+}
+.logo {
+    margin-left:15px;
+}
+.error {
+    background-color:red;
+}

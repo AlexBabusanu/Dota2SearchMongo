@@ -1,0 +1,46 @@
+<div class="inventory">
+    <label>Search for Item</label>
+    <input name="itemName" type="text" placeholder="Search Item" [formControl]="inputName">
+    <div class="container" *ngIf="itemName !== ''">
+      <li *ngFor="let i of array">
+        <img [src]="i.image_inventory">{{i.name}}
+      </li>
+    </div>
+  <ul class="inv">
+    <li *ngFor="let item of itemDetails">
+      <div class="item card">
+       <a [routerLink]="item.index">
+        <img 
+        [src]="item.image" 
+        [ngClass]="{
+          'common': !item.rarity,
+          'uncommon': item.rarity === 'uncommon',
+          'rare': item.rarity === 'rare',
+          'mythic': item.rarity === 'mythical',
+          'legendary': item.rarity === 'legendary',
+          'immortal': item.rarity === 'immortal',
+          'arcana': item.rarity === 'arcana',
+          'ancient': item.rarity === 'ancient'
+        }"
+        >
+        <div class="about">
+            <h4>{{ item.name }}</h4>
+            <p *ngIf="item.type ==='wearable' || item.type ==='taunt'">For: {{ item.hero | titlecase}}</p>
+            <p>Type: {{ item.type | titlecase }}</p>
+        </div>
+       </a> 
+      </div>
+    </li>
+  </ul>
+
+  <ul class="nav">
+      <li [ngClass]="{disabled:pager.currentPage === 1}">
+        <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+      </li>
+      <li *ngFor="let page of pager.pages" [ngClass]="{active: pager.currentPage === page}">
+        <a (click)="setPage(page)">{{ page }}</a>
+      </li>
+      <li [ngClass]="{disabled:pager.currentPage === pager.total}">
+        <a (click)="setPage(pager.currentPage + 1)">Next</a></li>
+    </ul>
+</div>

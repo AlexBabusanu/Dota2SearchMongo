@@ -1,0 +1,7 @@
+<div class="friendList">
+  <div class="loading" *ngIf="loading">loading...</div>
+  <div class="error" *ngIf="error" [innerHTML]="error.error"> </div>
+  <ul>
+    <li *ngFor="let friend of friends"> <a [routerLink]="['inventory', friend.steamId]"> {{ friend.username }} </a> </li>
+  </ul>
+</div>

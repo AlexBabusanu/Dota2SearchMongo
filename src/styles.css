@@ -1,1 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+ul {
+    list-style: none;
+}
+
+body, html {
+    margin:0;
+    padding:0;
+    background: #485563;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #29323c, #485563);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #29323c, #485563); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    font-family: 'Roboto', sans-serif;
+}
+
+a {
+    color:inherit;
+    text-decoration: none;
+}
+img {
+    vertical-align: middle;
+}
+.common {
+    border-bottom:4px solid #b0c3d9;
+}
+.uncommon {
+    border-bottom:4px solid #5e98d9;
+}
+.mythic {
+    border-bottom:4px solid #8847ff;
+}
+.legendary {
+    border-bottom:4px solid #d32ce6;
+}
+.immortal {
+    border-bottom:4px solid #b28a33;
+}
+.arcana {
+    border-bottom:4px solid #ade55c;
+}
+.rare {
+    border-bottom:4px solid #4b69ff;
+}
+.ancient {
+    border-bottom:4px solid #eb4b4b;
+}
+.dotaplus {
+    border-bottom:4px solid #fff34f;
+}
