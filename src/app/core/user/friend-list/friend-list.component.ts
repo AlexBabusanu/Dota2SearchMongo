@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SteamService } from '../../../shared/steamApi.service';
 import { ActivatedRoute } from '@angular/router';
 import { UserModel } from '../../../shared/users.model';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-friend-list',
@@ -12,6 +13,9 @@ export class FriendListComponent implements OnInit {
   friends = [];
   loading = true;
   error;
+
+  inputName = new FormControl();
+
   constructor(private steamApi:SteamService, private route:ActivatedRoute) { }
 
   ngOnInit() {

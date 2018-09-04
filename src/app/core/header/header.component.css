@@ -12,6 +12,10 @@ nav {
 ul {
     margin-right:15px;
 }
+ul li {
+    float:left;
+    margin-right:15px;
+}
 .logo {
     margin-left:15px;
 }
