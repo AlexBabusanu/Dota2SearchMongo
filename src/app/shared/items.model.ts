@@ -8,7 +8,7 @@ export class Item {
 
     constructor(details){
         this.name = details.name;
-        this.image = details.image_alt1;
+        this.image = (details.image_alt1 === "http://cdn.dota2.com/apps/570/" ? details.image_alt2 : details.image_alt1 );
         this.rarity = details.item_rarity;
         this.type = details.prefab;
         this.hero = (details.used_by_heroes === 1? "" : details.used_by_heroes);

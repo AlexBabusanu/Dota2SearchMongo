@@ -18,6 +18,10 @@ a {
    border-radius:5px;
    overflow:hidden;
    display:grid;
+   max-width:256px;
+}
+.type {
+    align-self:end;
 }
 ul.inv {
     list-style: none;

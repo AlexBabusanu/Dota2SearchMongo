@@ -29,29 +29,45 @@ export class InventoryComponent implements OnInit {
     )
     this.steamApi.getInventoryItems(this.root.snapshot.params.id).subscribe(
       (res) => {
+        
         for(let item of res["result"]["items"]){
           //let itemModeled = new Item(item);
           this.items.push(item);
         }
       },
       (err) => console.log(err),
-      () => this.search("")
+      () => {
+        
+        this.page= this.items;
+        this.setPage(1);
+      }
     )
     
   }
-  search(itemName:string) {  
+  search(itemName:string) {     
     
-    this.page = this.items.filter(
-      item => item.id.toString().includes(itemName)   
-    );
-    this.setPage(1);
+    this.steamApi.getItemThatContains(itemName).subscribe(
+      (res) => {
+        let resultItems = [];
+        // for(let item of res) {
+        //   resultItems.push(item.id);
+        // }
+        
+        //this.page = this.items.filter(i => resultItems.includes(i.defindex));
+        
+        this.setPage(1);
+      }
+    )
+    
   }
   setPage(page:number){
     this.itemDetails = [];
     this.pager = this.pageService.getPages(this.page.length, page);    
-    this.pagedItems = this.page.slice(this.pager.startIndex, this.pager.endIndex + 1);
+    this.pagedItems = this.page.slice(this.pager.startIndex, this.pager.endIndex + 1);   
+    console.log(this.pager.startIndex, this.pager.endIndex);
     for(let x=this.pager.startIndex; x < this.pager.endIndex+1; x++){
-      this.steamApi.getInventoryItemsDetail(this.items[x].defindex).subscribe(
+      
+      this.steamApi.getInventoryItemsDetail(this.pagedItems[x].defindex).subscribe(
         (res) => {
           let itemModel = new Item(res);
           this.itemDetails.push(itemModel);

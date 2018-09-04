@@ -23,7 +23,7 @@ app.get("", (req, res)=> {
 app.get("/mysql", (req, res) => {
     mongo.connect(url, { useNewUrlParser: true }, function(err, db) {
         if (err) throw err;
-        var dbo = db.db("mydb");
+        const dbo = db.db("mydb");
         dbo.collection("Dota2Items").findOne({id: Number(req.query.itemIndex)} ,function(err, result){
             res.send(result);
             db.close();
@@ -31,21 +31,18 @@ app.get("/mysql", (req, res) => {
     });
     
 })
-app.get("/item", (req, res) => {
-    let currentPath = dota2items.items_game.items[req.query.itemIndex];
-    if(currentPath){
-        currentPath.index = req.query.index;
-        if(typeof currentPath.used_by_heroes === "object"){
-            currentPath.used_by_heroes = Object.keys(currentPath.used_by_heroes)[0].replace(/_/g, " ").replace(/(?:npc dota hero )/, "");
-        }
-        if(dota2icons[currentPath.name]) {
-            currentPath.image_inventory = dota2icons[currentPath.name];
-        }
-        else{
-            currentPath.image_inventory = dota2paths[req.query.itemIndex].path;
-        }
-    }
-    res.send(dota2items.items_game.items[req.query.itemIndex]);
+
+app.get("/checkString", (req, res)=> {
+    mongo.connect(url, {useNewUrlParser: true}, function(err, db){
+        if(err) throw err;
+        const dbo = db.db("mydb");
+        const regex = new RegExp( req.query.itemString, "i");
+        dbo.collection("Dota2Items").find({"name": regex}).toArray(function(err, response){
+            if(err) throw err;
+            res.send(response);
+        })
+    });
+    
 })
 
 const port = 3000;

@@ -77,6 +77,10 @@ export class SteamService {
     getInventoryItemsDetail(index){
         return this.getItem(index);
     }
+
+    getItemThatContains(string){
+        return this.http.get("http://localhost:3000/checkString", {params: {itemString: string}});
+    }
     //get specific item
     getItem(index){
         return this.http.get("http://localhost:3000/mysql", {params: {itemIndex: index}})

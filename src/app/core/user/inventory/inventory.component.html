@@ -26,7 +26,10 @@
         <div class="about">
             <h4>{{ item.name }}</h4>
             <p *ngIf="item.type ==='wearable' || item.type ==='taunt'">For: {{ item.hero | titlecase}}</p>
-            <p>Type: {{ item.type | titlecase }}</p>
+            <div class="type"> 
+              <p>Type: {{ item.type | titlecase }}</p>
+            </div>
+            
         </div>
        </a> 
       </div>
