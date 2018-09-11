@@ -1,7 +1,23 @@
-.friendList {
+* {
     color:#fff;
 }
-
+.friend {
+    margin-top:50px;
+}
+.search {
+    display:flex;
+    justify-content: center;
+}
 .hasItem {
     border:2px solid gold;
+}
+.loading {
+    display:absolute;
+    top:50%;
+    left:50%;
+}
+
+ul {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
 }

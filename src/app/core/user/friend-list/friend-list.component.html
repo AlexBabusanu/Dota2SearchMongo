@@ -1,16 +1,19 @@
-<div class="friendList">
+<div class="friend">
   <div class="loading" *ngIf="loading">loading...</div>
-  <div class="error" *ngIf="error" [innerHTML]="error.error"> </div>
-  <div class="search">
-      <label>Search for Item</label>
-      <input name="itemName" type="text" placeholder="Search Item" [formControl]="inputName">
-      <div class="container" *ngIf="itemName !== ''">
-        <li *ngFor="let i of array">
-          <img [src]="i.avatar">{{i.name}}
-        </li>
-      </div>
+
+  <div class="friendList" *ngIf="!loading">
+  
+    <div class="error" *ngIf="error" [innerHTML]="error.error"> </div>
+    <div class="search">
+        <input name="itemName" type="text" placeholder="Search inventories for item" [formControl]="inputName">
+        <div class="container" *ngIf="itemName !== ''">
+          <li *ngFor="let i of array">
+            <img [src]="i.avatar">{{i.name}}
+          </li>
+        </div>
+    </div>
+    <ul>
+      <li *ngFor="let friend of friends"> <a [routerLink]="['inventory', friend.steamId]" [class.hasItem]="friend.hasItem"><img [src]="friend.avatar" > {{ friend.username }} </a> </li>
+    </ul>
   </div>
-  <ul>
-    <li *ngFor="let friend of friends"> <a [routerLink]="['inventory', friend.steamId]" [class.hasItem]="friend.hasItem"> {{ friend.username }} </a> </li>
-  </ul>
 </div>

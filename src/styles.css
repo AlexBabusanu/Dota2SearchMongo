@@ -49,3 +49,14 @@ img {
 .dotaplus {
     border-bottom:4px solid #fff34f;
 }
+
+input {
+    border-radius:5px;
+    border-color:#bcd5d1;
+    background-color:#bcd5d1;
+    height:50px;
+    width:300px;
+    text-indent: 10px;
+    font-size:20px;
+    z-index:15;
+}

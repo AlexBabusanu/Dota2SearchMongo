@@ -1,6 +1,9 @@
 <nav [class.error]="error">
   <div>
-    <div class="logo"><a [routerLink]="['']">Dota2Search</a></div>
+    <div class="logo">
+      <span *ngIf="!user"><a [routerLink]="['']">Dota2Search</a></span>
+      <span *ngIf="user"><a [routerLink]="['inventory', user.steamId]"><img [src]="user.avatar">{{user.username}}</a></span>
+    </div>
   </div>
   <div *ngIf="error">Steam Service is down. Try again after a few minutes.</div>
   <div>

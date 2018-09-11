@@ -22,15 +22,13 @@ export class FriendListComponent implements OnInit {
   ngOnInit() {
     this.inputName.valueChanges.pipe(debounceTime(500)).subscribe(
       (val) => {
-      if(val.length > 0){
-        this.search(val.toLowerCase())
-      }
-      else {
         for(let friend of this.friends) {
           friend.hasItem = false;
         }
+        if(val.length > 0){
+          this.search(val.toLowerCase())
+        }
       }
-    }
     )
     this.steamApi.getFriends(this.route.snapshot.params.id).subscribe(
       (res) => {

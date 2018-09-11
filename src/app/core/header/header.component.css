@@ -10,10 +10,9 @@ nav {
     color:#fff;
 }
 ul {
-    margin-right:15px;
+    display:flex;
 }
 ul li {
-    float:left;
     margin-right:15px;
 }
 .logo {

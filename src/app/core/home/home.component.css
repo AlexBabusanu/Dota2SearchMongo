@@ -4,7 +4,6 @@
     align-items: center;
     height:100vh;
     background-image:url(../../../assets/main.jpg);
-    background-size:160%;
     background-position:center;
 }
 input {
