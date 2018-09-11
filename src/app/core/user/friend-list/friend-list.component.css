@@ -1,3 +1,7 @@
 .friendList {
     color:#fff;
 }
+
+.hasItem {
+    border:2px solid gold;
+}

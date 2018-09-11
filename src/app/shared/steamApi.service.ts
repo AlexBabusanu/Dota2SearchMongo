@@ -11,19 +11,33 @@ export class SteamService {
     constructor(private http:HttpClient) {}
 
     //get user steam details
+    // userSteam(steamId) {
+    //     return this.getInventory(steamId).pipe(
+    //         switchMap(
+    //             (res) => {
+    //                 if(res["result"].status === 1){
+    //                     return this.http.get("https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key=" + this.apiKey + "&steamids=" + steamId) 
+    //                 }
+    //                 else {
+    //                     return "er";
+    //                 }
+    //             }
+    //         )
+    //     )
+    // }
     userSteam(steamId) {
-        return this.getInventory(steamId).pipe(
-            switchMap(
-                (res) => {
-                    if(res["result"].status === 1){
-                        return this.http.get("https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key=" + this.apiKey + "&steamids=" + steamId) 
-                    }
-                    else {
-                        return "er";
-                    }
+        let test = forkJoin(
+            this.getInventory(steamId), 
+            this.http.get("https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key=" + this.apiKey + "&steamids=" + steamId)
+        ).pipe(
+            map(([inventory, summary]) => {
+                if(inventory["result"].status === 1){
+                    return { inventory, summary }
                 }
-            )
+                                
+            })
         )
+        return test;
     }
 
     //get player inventory details

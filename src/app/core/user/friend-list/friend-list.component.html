@@ -6,11 +6,11 @@
       <input name="itemName" type="text" placeholder="Search Item" [formControl]="inputName">
       <div class="container" *ngIf="itemName !== ''">
         <li *ngFor="let i of array">
-          <img [src]="i.image_inventory">{{i.name}}
+          <img [src]="i.avatar">{{i.name}}
         </li>
       </div>
   </div>
   <ul>
-    <li *ngFor="let friend of friends"> <a [routerLink]="['inventory', friend.steamId]"> {{ friend.username }} </a> </li>
+    <li *ngFor="let friend of friends"> <a [routerLink]="['inventory', friend.steamId]" [class.hasItem]="friend.hasItem"> {{ friend.username }} </a> </li>
   </ul>
 </div>

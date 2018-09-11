@@ -2,11 +2,11 @@
   <div>
     <div class="logo"><a [routerLink]="['']">Dota2Search</a></div>
   </div>
-  <div *ngIf="error">Steam Service is down. Try agian after a few minutes.</div>
+  <div *ngIf="error">Steam Service is down. Try again after a few minutes.</div>
   <div>
     <ul>
-      <li>
-          <a [routerLink]="['']">Friends List</a>
+      <li *ngIf="mainUser">
+          <a [routerLink]="[mainUser]">Friends List</a>
       </li>
       <li>        
         <a [routerLink]="['']">Home</a>

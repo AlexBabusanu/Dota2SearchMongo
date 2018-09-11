@@ -48,11 +48,10 @@ export class InventoryComponent implements OnInit {
     
     this.steamApi.getItemThatContains(itemName).subscribe(
       (res) => {
-        // let arrayRes = [];
-        // arrayRes.push(res);
-        // console.log(arrayRes);
+         let arrayRes = [];
+         arrayRes.push(res);
         let resultItems = [];
-         for(let item of res) {
+         for(let item of arrayRes[0]) {
           resultItems.push(item.id);
          }
         
