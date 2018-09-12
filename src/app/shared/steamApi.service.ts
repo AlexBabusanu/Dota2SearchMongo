@@ -101,4 +101,8 @@ export class SteamService {
         //return this.http.get("http://localhost:3000/item", {params: {itemIndex: index}})
     }
 
+    login(){
+        return this.http.get("http://localhost:3000/auth");
+    }
+
 }

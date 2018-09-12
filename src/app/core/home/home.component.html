@@ -1,4 +1,9 @@
 <div class="main">
+  <div class="grid">
+      <button class="steamLogin" (click)="steam()"><img src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png?t=962016"></button> 
+      <input (keydown.enter)="submit($event)" placeholder="Your steam id">
+  </div>
+  
   <div class="cover"></div>
-  <input (keydown.enter)="submit($event)" placeholder="Your steam id">
+  
 </div>

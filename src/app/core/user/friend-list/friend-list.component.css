@@ -4,10 +4,7 @@
 .friend {
     margin-top:50px;
 }
-.search {
-    display:flex;
-    justify-content: center;
-}
+
 .hasItem {
     border:2px solid gold;
 }
@@ -20,4 +17,12 @@
 ul {
     display:grid;
     grid-template-columns: 1fr 1fr;
+    grid-row-gap:15px;
+}
+
+
+@media only screen and (max-width:500px){
+    ul {
+        grid-template-columns: 1fr;
+    }
 }
