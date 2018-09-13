@@ -11,9 +11,9 @@ import { debounceTime } from 'rxjs/operators';
   styleUrls: ['./friend-list.component.css']
 })
 export class FriendListComponent implements OnInit {
-  friends = [];
-  loading = true;
-  error;
+  friends:any = [];
+  loading:boolean = true;
+  error:any;
 
   inputName = new FormControl();
 

@@ -10,7 +10,7 @@ import { UserModel } from '../../shared/users.model';
 })
 export class HeaderComponent implements OnInit {
   error:any;
-  mainUser = false;
+  mainUser:boolean = false;
   user:any = "";
   logged: boolean = false;
 

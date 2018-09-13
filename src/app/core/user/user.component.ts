@@ -9,7 +9,7 @@ import { UserModel } from '../../shared/users.model';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  user;
+  user:any;
   
   constructor(private steamApi:SteamService, private route:ActivatedRoute) { }
 

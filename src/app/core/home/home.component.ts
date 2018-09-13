@@ -13,16 +13,16 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     if(localStorage.length > 0) {
-      let user =  localStorage.getItem("user")
-      this.router.navigate(["/", user])
+      let user =  localStorage.getItem("user");
+      this.router.navigate(["/", user]);
     }
   }
 
   submit(event){    
-    this.router.navigate(["", event.target.value])
+    this.router.navigate(["", event.target.value]);
   }
 
   steam(){
-    window.location.href = "http://localhost:3000/auth"
+    window.location.href = "http://localhost:3000/auth";
   }
 }

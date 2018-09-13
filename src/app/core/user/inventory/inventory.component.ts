@@ -12,8 +12,8 @@ import { Item } from '../../../shared/items.model';
   styleUrls: ['./inventory.component.css']
 })
 export class InventoryComponent implements OnInit {
-  items = [];
-  itemDetails = [];
+  items:any = [];
+  itemDetails:any = [];
 
   //pages and nr of items per page stored
   pager:any = {};

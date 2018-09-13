@@ -3,7 +3,7 @@ export class UserModel {
     avatar:string;
     steamId:number;
     hasItem:boolean;
-    inventory:{};
+    inventory:any;
 
     
 

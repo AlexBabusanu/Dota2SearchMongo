@@ -37,7 +37,7 @@ export class SteamService {
                 (res) => {                    
                     let friends = [];
                     for (let friend of res["friendslist"].friends){
-                        friends.push(this.userSteam(friend.steamid))
+                        friends.push(this.userSteam(friend.steamid));
                     }
                     return forkJoin(friends);
                 }                  
@@ -51,8 +51,7 @@ export class SteamService {
     }
     //get specific item
     getItem(index){
-        return this.http.get("http://localhost:3000/mysql", {params: {itemIndex: index}})
-        //return this.http.get("http://localhost:3000/item", {params: {itemIndex: index}})
+        return this.http.get("http://localhost:3000/mysql", {params: {itemIndex: index}});
     }
 
     login(){
