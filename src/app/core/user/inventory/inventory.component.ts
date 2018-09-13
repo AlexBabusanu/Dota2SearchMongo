@@ -15,6 +15,7 @@ export class InventoryComponent implements OnInit {
   items = [];
   itemDetails = [];
 
+  //pages and nr of items per page stored
   pager:any = {};
   pagedItems:any = [];
 
@@ -27,25 +28,21 @@ export class InventoryComponent implements OnInit {
     this.inputName.valueChanges.pipe(debounceTime(500)).subscribe(
       (val) => this.search(val.toLowerCase())
     )
-    this.steamApi.getInventoryItems(this.root.snapshot.params.id).subscribe(
-      (res) => {
-        
+    this.steamApi.getInventory(this.root.snapshot.params.id).subscribe(
+      (res) => {        
         for(let item of res["result"]["items"]){
-          //let itemModeled = new Item(item);
           this.items.push(item);
         }
       },
       (err) => console.log(err),
-      () => {
-        
-        this.page= this.items;
+      () => {        
+        this.page = this.items;
         this.setPage(1);
       }
     )
     
   }
-  search(itemName:string) {     
-    
+  search(itemName:string) {       
     this.steamApi.getItemThatContains(itemName).subscribe(
       (res) => {
          let arrayRes = [];
@@ -53,14 +50,11 @@ export class InventoryComponent implements OnInit {
         let resultItems = [];
          for(let item of arrayRes[0]) {
           resultItems.push(item.id);
-         }
-        
-        this.page = this.items.filter(i => resultItems.includes(i.defindex));
-        
+         }        
+        this.page = this.items.filter(i => resultItems.includes(i.defindex));        
         this.setPage(1);
       }
-    )
-    
+    )    
   }
   setPage(page:number){
     this.itemDetails = [];
@@ -68,7 +62,7 @@ export class InventoryComponent implements OnInit {
     this.pagedItems = this.page.slice(this.pager.startIndex, this.pager.endIndex + 1);   
     if(this.page.length >0){   
       for(let x=this.pager.startIndex; x < this.pager.endIndex+1; x++){      
-        this.steamApi.getInventoryItemsDetail(this.page[x].defindex).subscribe(
+        this.steamApi.getItem(this.page[x].defindex).subscribe(
           (res) => {
             let itemModel = new Item(res);
             this.itemDetails.push(itemModel);            

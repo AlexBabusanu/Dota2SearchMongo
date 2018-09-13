@@ -34,9 +34,9 @@ export class FriendListComponent implements OnInit {
       (res) => {
         for (let friend of res) {          
           if (friend) {
-            console.log(friend);
+            
             let modeledFriend = new UserModel(friend);
-            console.log(modeledFriend);
+           
             this.friends.push(modeledFriend);            
           }
         }
