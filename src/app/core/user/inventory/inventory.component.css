@@ -93,3 +93,8 @@ ul.nav li {
         grid-template-columns: 1fr 1fr;
     }
 }
+@media only screen and (max-width:550px) {
+    ul.inv {
+        grid-template-columns: 1fr;
+    }
+}

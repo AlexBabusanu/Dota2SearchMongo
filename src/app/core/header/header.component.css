@@ -8,6 +8,7 @@ nav {
     align-items: center;
     z-index:50;
     color:#fff;
+    min-height:50px;
 }
 ul {
     display:flex;
@@ -17,6 +18,7 @@ ul li {
 }
 .logo {
     margin-left:15px;
+    cursor: pointer;
 }
 .error {
     background-color:red;
@@ -27,4 +29,23 @@ button {
     color:#fff;
     font-size:inherit;
     font-family: inherit;
+    cursor: pointer;
+}
+.blur {
+    position:absolute;
+    width:110%;
+    height:100%;
+    top:-10px;
+    left:-10px;
+    filter:blur(13px);
+    background: #191e24;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #191e24, #36404b);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #191e24, #333c46); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.links {
+    display:flex;
+    z-index:15;
+    width:100%;
+    justify-content: space-between;
+    align-items: center;
 }

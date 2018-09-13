@@ -58,4 +58,7 @@ export class HeaderComponent implements OnInit {
     this.router.navigate([""]);
   }
 
+  goTo() {
+    this.router.navigate([this.user.steamId, "inventory", this.user.steamId], {relativeTo:this.routes});
+  }
 }

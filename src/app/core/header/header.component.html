@@ -1,18 +1,22 @@
 <nav [class.error]="error">
-  <div>
-    <div class="logo">
-      <span *ngIf="!user"><a [routerLink]="['']">Dota2Search</a></span>
-      <span *ngIf="user"><a [routerLink]="['inventory', user.steamId]"><img [src]="user.avatar">{{user.username}}</a></span>
-    </div>
+  <div class="blur"></div>
+  <div class="links">
+    <div>
+        <div class="logo">
+          <span *ngIf="!user"><a [routerLink]="['']">Dota2Search</a></span>
+          <span *ngIf="user"><a (click)="goTo()"><img [src]="user.avatar">{{user.username}}</a></span>
+        </div>
+      </div>
+      <div *ngIf="error">Steam Service is down. Try again after a few minutes.</div>
+      <div>
+        <ul>
+          
+          <li *ngIf="mainUser">
+              <a [routerLink]="[user.steamId]">Friends List</a>
+          </li>
+          <li *ngIf="logged"><button (click)="logout()">Logout</button></li>
+        </ul>
+      </div>
   </div>
-  <div *ngIf="error">Steam Service is down. Try again after a few minutes.</div>
-  <div>
-    <ul>
-      
-      <li *ngIf="mainUser">
-          <a [routerLink]="[user.steamId]">Friends List</a>
-      </li>
-      <li *ngIf="logged"><button (click)="logout()">Logout</button></li>
-    </ul>
-  </div>
+  
 </nav>

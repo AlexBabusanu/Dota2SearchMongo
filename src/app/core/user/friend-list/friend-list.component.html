@@ -12,8 +12,16 @@
           </li>
         </div>
     </div>
-    <ul>
-      <li *ngFor="let friend of friends"> <a [routerLink]="['inventory', friend.steamId]" [class.hasItem]="friend.hasItem"><img [src]="friend.avatar" > {{ friend.username }} </a> </li>
-    </ul>
+    <div class="center">
+      <ul>
+          <li *ngFor="let friend of friends" [class.hasItem]="friend.hasItem"> 
+            <a [routerLink]="['inventory', friend.steamId]" >
+              <img [src]="friend.avatar" > {{ friend.username }} 
+            </a>
+            <div class="found" *ngIf="friend.hasItem">!</div> 
+          </li>
+      </ul>
+    </div>
+    
   </div>
 </div>

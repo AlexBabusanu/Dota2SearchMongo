@@ -26,7 +26,7 @@ export class FriendListComponent implements OnInit {
           friend.hasItem = false;
         }
         if(val.length > 0){
-          this.search(val.toLowerCase())
+          this.search(val.toLowerCase());
         }
       }
     )
@@ -51,8 +51,7 @@ export class FriendListComponent implements OnInit {
   search(itemName:string) {
     this.steamApi.getItemThatContains(itemName).subscribe(
       (res) => {
-        Object.keys(res).map(key => {
-         
+        Object.keys(res).map(key => {         
           for(let friend of this.friends){
             if(friend.inventory.findIndex(x => x.defindex == res[key]["id"]) != "-1"){
               friend.hasItem = true;
@@ -63,4 +62,5 @@ export class FriendListComponent implements OnInit {
       }
     )
   }
+  
 }
