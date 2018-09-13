@@ -10,7 +10,8 @@
 .grid {
     display:grid;
     grid-gap:15px;
-    z-index:10
+    z-index:10;
+    grid-template-rows:1fr 1fr minmax(50px, 100px)
 }
 
 .cover {
@@ -29,8 +30,16 @@
     justify-self: center;
     padding:5px;
     border-radius:5px;
+    cursor: pointer;
 }
 .grid h2 {
     color:#fff;
     text-align: center;
+}
+.ng-invalid.ng-dirty {
+    border:2px solid red;
+}
+
+.error {
+    color:red;
 }

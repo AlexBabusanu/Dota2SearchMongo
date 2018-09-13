@@ -1,17 +1,14 @@
 const express = require("express");
-
-const session = require("express-session");
-const RedisStore = require("connect-redis")(session);
 const cors = require("cors");
 const app = express();
-
 const mongo = require("mongodb").MongoClient;
-
 const openid = require("openid");
 
-const apiKey = "BD496BFA7696FD5DE7D3FF190B371B1B";
+//MongoDB database
 const url = "mongodb://skidi:mercury@dota2search-shard-00-00-odko1.mongodb.net:27017,dota2search-shard-00-01-odko1.mongodb.net:27017,dota2search-shard-00-02-odko1.mongodb.net:27017/test?ssl=true&replicaSet=Dota2Search-shard-0&authSource=admin&retryWrites=true";
 
+
+//OpenID settings
 const relyingParty = new openid.RelyingParty(
     "http://localhost:3000/verify",
     "http://localhost:3000",
@@ -20,6 +17,7 @@ const relyingParty = new openid.RelyingParty(
     []
 );
 
+//Cross origin settings
 app.use(cors({
     'allowedHeaders': ['sessionId', 'Content-Type'],
     'exposedHeaders': ['sessionId'],
@@ -28,23 +26,9 @@ app.use(cors({
     'preflightContinue': false
 }));
 
-app.use(session({
-    secret: "hotdog",
-    store: new RedisStore({
-        host: "localhost",
-        port: 6379,
-    }),
-    saveUninitialized: true,
-    resave: false,
-    cookie: {
-        expires: 600000
-    }
-}));
 
-
-
-app.get("/auth", (req, res) => {
-    
+//Authenticate OpenId
+app.get("/auth", (req, res) => {    
     relyingParty.authenticate('https://steamcommunity.com/openid', false, (err, authUrl)=>{
         if(err){
             console.log(err);
@@ -60,6 +44,8 @@ app.get("/auth", (req, res) => {
     })
 });
 
+
+//Verify OpenId
 app.get("/verify", (req, res) => {
     relyingParty.verifyAssertion(req, (err, result)=> {
         if(err){
@@ -70,15 +56,14 @@ app.get("/verify", (req, res) => {
             res.end("failed to authenticate.");
         }
         else {
-           //console.log(JSON.stringify(result.claimedIdentifier));
-            steamId = result.claimedIdentifier.replace('https://steamcommunity.com/openid/id/', '');
-           console.log(steamId);
+           steamId = result.claimedIdentifier.replace('https://steamcommunity.com/openid/id/', '');           
            res.redirect('http://localhost:4200/'+ steamId);
         }
     })
 })
 
-app.get("/mysql", (req, res) => {
+//retrieve dota2items from mongo DB
+app.get("/mongo", (req, res) => {
     mongo.connect(url, { useNewUrlParser: true }, function(err, db) {
         if (err) throw err;
         const dbo = db.db("mydb");
@@ -90,6 +75,7 @@ app.get("/mysql", (req, res) => {
     
 })
 
+//check items that contain string
 app.get("/checkString", (req, res)=> {
     mongo.connect(url, {useNewUrlParser: true}, function(err, db){
         if(err) throw err;
@@ -103,6 +89,6 @@ app.get("/checkString", (req, res)=> {
     
 })
 
+//create server;
 const port = 3000;
-
 app.listen(port, () => console.log("Node server running on port: " + port));

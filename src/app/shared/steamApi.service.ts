@@ -51,7 +51,7 @@ export class SteamService {
     }
     //get specific item
     getItem(index){
-        return this.http.get("http://localhost:3000/mysql", {params: {itemIndex: index}});
+        return this.http.get("http://localhost:3000/mongo", {params: {itemIndex: index}});
     }
 
     login(){
