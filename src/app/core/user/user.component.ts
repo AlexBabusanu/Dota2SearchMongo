@@ -15,9 +15,14 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     this.steamApi.userSteam(this.route.snapshot.params.id).subscribe(
-      (res) => {        
+      (res) => {  
+              
         let help = new UserModel(res);
-        this.user = help
+        this.user = help;
+        if(localStorage.length < 1){
+          localStorage.setItem("user", help.steamId.toString())
+        }
+        
       },
       
     )

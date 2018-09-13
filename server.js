@@ -36,11 +36,11 @@ app.use(session({
     }),
     saveUninitialized: true,
     resave: false,
+    cookie: {
+        expires: 600000
+    }
 }));
 
-app.get("", (req, res)=> {
-    res.send("hellow world")
-});
 
 
 app.get("/auth", (req, res) => {
@@ -73,7 +73,7 @@ app.get("/verify", (req, res) => {
            //console.log(JSON.stringify(result.claimedIdentifier));
             steamId = result.claimedIdentifier.replace('https://steamcommunity.com/openid/id/', '');
            console.log(steamId);
-           res.send(steamId);
+           res.redirect('http://localhost:4200/'+ steamId);
         }
     })
 })

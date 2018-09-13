@@ -8,12 +8,14 @@
   <div *ngIf="error">Steam Service is down. Try again after a few minutes.</div>
   <div>
     <ul>
+      
       <li *ngIf="mainUser">
           <a [routerLink]="[mainUser]">Friends List</a>
       </li>
       <li>        
         <a [routerLink]="['']">Home</a>
       </li>
+      <li *ngIf="logged"><button (click)="logout()">Logout</button></li>
     </ul>
   </div>
 </nav>

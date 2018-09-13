@@ -12,6 +12,10 @@ export class HomeComponent implements OnInit {
   constructor(private router:Router, private steamApi:SteamService) { }
 
   ngOnInit() {
+    if(localStorage.length > 0) {
+      let user =  localStorage.getItem("user")
+      this.router.navigate(["/", user])
+    }
   }
 
   submit(event){    

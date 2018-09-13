@@ -12,22 +12,25 @@ export class HeaderComponent implements OnInit {
   error:any;
   mainUser = false;
   user:any;
+  logged: boolean = false;
 
-  constructor(private steamApi:SteamService, private router: ActivatedRoute, private routes:Router) {
-    routes.events.subscribe(
+  constructor(private steamApi:SteamService, private routes: ActivatedRoute, private router:Router) {
+    router.events.subscribe(
       (event) => {
         if(event instanceof NavigationEnd && event.url != "/") {
           this.mainUser = true;
-          this.steamApi.userSteam(router.root.firstChild.snapshot.params.id).subscribe(
+          this.steamApi.userSteam(routes.root.firstChild.snapshot.params.id).subscribe(
             (res) => {
               let m = new UserModel(res);
               this.user = m;
+              this.logged = true;
             }
           )
         }
         else if(event instanceof NavigationEnd && event.url === "/") {
           this.mainUser = false;
           this.user = "";
+          this.logged = false;
         }
         
       }
@@ -36,13 +39,20 @@ export class HeaderComponent implements OnInit {
    }
 
   ngOnInit() {
-    
+    if(localStorage.length > 0) {
+      this.logged = true;
+    }
     this.steamApi.userSteam("76561197987293034").subscribe(
       (res) => {        
       },
       (err) => this.error = err
     )
     
+  }
+
+  logout(){
+    localStorage.removeItem("user");
+    this.router.navigate([""]);
   }
 
 }

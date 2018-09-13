@@ -10,6 +10,7 @@
 .grid {
     display:grid;
     grid-gap:15px;
+    z-index:10
 }
 
 .cover {
@@ -23,10 +24,13 @@
 .steamLogin {
     background:#5c7e10;
     color:#e5e4dc;
-    z-index:10;
     border:none;
     display:flex;
     justify-self: center;
     padding:5px;
     border-radius:5px;
+}
+.grid h2 {
+    color:#fff;
+    text-align: center;
 }

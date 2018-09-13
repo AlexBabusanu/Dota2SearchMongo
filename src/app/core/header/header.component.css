@@ -21,3 +21,10 @@ ul li {
 .error {
     background-color:red;
 }
+button {
+    background: inherit;
+    border:none;
+    color:#fff;
+    font-size:inherit;
+    font-family: inherit;
+}
