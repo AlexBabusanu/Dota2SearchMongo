@@ -14,7 +14,7 @@ export class SteamService {
     userSteam(steamId) {
         let mergedInfo = forkJoin(
             this.getInventory(steamId), 
-            this.http.get("https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key=" + this.apiKey + "&steamids=" + steamId)
+            this.getDetails(steamId)
         ).pipe(
             map(([inventory, summary]) => {
                 if(inventory["result"].status === 1){
@@ -25,6 +25,10 @@ export class SteamService {
         return mergedInfo;
     }
 
+    //get user details
+    getDetails(steamId){
+        return  this.http.get("https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key=" + this.apiKey + "&steamids=" + steamId);
+    }
     //get player inventory details
     getInventory(steamId) {
         return this.http.get("http://api.steampowered.com/IEconItems_570/GetPlayerItems/v0001/?key=" + this.apiKey + "&steamid=" + steamId);

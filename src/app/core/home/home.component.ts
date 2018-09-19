@@ -9,9 +9,9 @@ import { SteamService } from '../../shared/steamApi.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  error:boolean;
+  steamID = "";
   constructor(private router:Router, private steamApi:SteamService) { }
-
   
 
   ngOnInit() {
@@ -21,8 +21,18 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  submit(event){    
-    this.router.navigate(["", event.target.value]);
+  submit(event){ 
+    this.steamApi.getDetails(event.target.value).subscribe(
+      (res) => {
+        if(res["response"].players.length === 0){
+          this.error = true;
+        }
+        else {
+          this.router.navigate(["", event.target.value]);
+        }
+      }
+    )   
+    
   }
 
   steam(){

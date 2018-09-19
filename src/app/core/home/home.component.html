@@ -3,13 +3,12 @@
       <button class="steamLogin" (click)="steam()"><img src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png?t=962016"></button> 
       <h2>or</h2>
       <div>
-          <input name="steamId" (keydown.enter)="submit($event)"  class="form-control" placeholder="Manually insert steamID"  ngModel required pattern=[0-9]{17} #steamId=ngModel>
+          <input name="steamId" (keydown.enter)="submit($event)"  class="form-control" placeholder="Manually insert steamID"  [(ngModel)]="steamID" required pattern=[0-9]{17} #steamId=ngModel>
           <div class="error" *ngIf="steamId.errors?.required && steamId.touched">Steam ID is required.</div>
           <div class="error" *ngIf="steamId.errors?.pattern && steamId.dirty">ID must be 17 char long and only numbers.</div>
-      </div>
-        
+          <div class="error" *ngIf="error && steamID.length === 17">SteamID is invalid.</div>          
+      </div>        
   </div>
   
-  <div class="cover"></div>
-  
+  <div class="cover"></div>  
 </div>

@@ -26,7 +26,6 @@ app.use(cors({
     'preflightContinue': false
 }));
 
-
 //Authenticate OpenId
 app.get("/auth", (req, res) => {    
     relyingParty.authenticate('https://steamcommunity.com/openid', false, (err, authUrl)=>{
@@ -43,7 +42,6 @@ app.get("/auth", (req, res) => {
         res.end();
     })
 });
-
 
 //Verify OpenId
 app.get("/verify", (req, res) => {
@@ -67,7 +65,8 @@ app.get("/mongo", (req, res) => {
     mongo.connect(url, { useNewUrlParser: true }, function(err, db) {
         if (err) throw err;
         const dbo = db.db("mydb");
-        dbo.collection("Dota2Items").findOne({id: Number(req.query.itemIndex)} ,function(err, result){
+        let sanitized = parseInt(req.query.itemIndex);
+        dbo.collection("Dota2Items").findOne({id: Number(sanitized)} ,function(err, result){
             res.send(result);
             db.close();
         })
@@ -80,7 +79,10 @@ app.get("/checkString", (req, res)=> {
     mongo.connect(url, {useNewUrlParser: true}, function(err, db){
         if(err) throw err;
         const dbo = db.db("mydb");
-        const regex = new RegExp( req.query.itemString, "i");
+
+        //TODO:edit to accept spaces
+        let escaped = req.query.itemString.replace(/\W/g, '');
+        const regex = new RegExp( escaped, "i");
         dbo.collection("Dota2Items").find({"name": regex}).toArray(function(err, response){
             if(err) throw err;
             res.send(response);
