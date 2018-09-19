@@ -53,9 +53,7 @@ li {
 .container {
     background:#fff;
 }
-.ng-invalid.ng-dirty {
-    border:2px solid red;
-}
+
 @media only screen and (max-width:1100px){
     ul {
         grid-template-columns: 1fr 1fr 1fr 1fr;

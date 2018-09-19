@@ -15,7 +15,7 @@ export class FriendListComponent implements OnInit {
   loading:boolean = true;
   error:any;
   items:any = [];
-
+  
   inputName = new FormControl();
 
   constructor(private steamApi:SteamService, private route:ActivatedRoute) { }
@@ -51,6 +51,12 @@ export class FriendListComponent implements OnInit {
       }
     )
   }
+
+  setSearch(itemName){
+    this.search(itemName);
+    this.inputName.setValue(itemName);
+  }
+
   search(itemName:string) {
     if(itemName.length === 0){
       return;
@@ -58,9 +64,14 @@ export class FriendListComponent implements OnInit {
     this.steamApi.getItemThatContains(itemName).subscribe(
       (res) => {
         console.log(res[0]);
-        for(let x = 0; x<5; x++){
-          this.items.push(res[x]);
-        }
+          for(let x = 0; x<5; x++){
+            if(res[x]){
+              this.items.push(res[x]);
+            }
+            
+          }
+        
+        
         console.log(res);
         Object.keys(res).map(key => {         
           for(let friend of this.friends){

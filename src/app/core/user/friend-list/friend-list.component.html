@@ -5,10 +5,10 @@
   
     <div class="error" *ngIf="error" [innerHTML]="error.error"> </div>
     <div class="search">
-        <input name="itemName" type="text" placeholder="Search inventories for item" [formControl]="inputName" pattern="[a-zA-Z0-9\s]+" minlength="1" maxlength="20">
+        <input name="itemName" type="text" placeholder="Search inventories for item" [formControl]="inputName" pattern="[a-zA-Z0-9\s]+" minlength="1" maxlength="50" >
         <div class="container" *ngIf="items.length > 0">
           <li *ngFor="let i of items">
-            <a><img [src]="i.image_alt1">{{i.name}}</a>
+            <a (click)="setSearch(i.name)"><img [src]="i.image_alt1">{{i.name}}</a>
           </li>
         </div>
     </div>

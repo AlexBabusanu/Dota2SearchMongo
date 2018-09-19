@@ -79,9 +79,7 @@ app.get("/checkString", (req, res)=> {
     mongo.connect(url, {useNewUrlParser: true}, function(err, db){
         if(err) throw err;
         const dbo = db.db("mydb");
-
-        //TODO:edit to accept spaces
-        let escaped = req.query.itemString.replace(/\W/g, '');
+        let escaped = req.query.itemString.replace(/[^\w\s]/g, '');
         const regex = new RegExp( escaped, "i");
         dbo.collection("Dota2Items").find({"name": regex}).toArray(function(err, response){
             if(err) throw err;
