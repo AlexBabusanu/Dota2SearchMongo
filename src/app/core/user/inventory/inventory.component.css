@@ -56,7 +56,8 @@ ul.nav {
     justify-content: center;
 }
 ul.nav li {
-    margin-left:5px
+    margin-left:5px;
+    cursor: pointer;
 }
 .container {
     max-height:300px;

@@ -14,7 +14,7 @@ import { Item } from '../../../shared/items.model';
 export class InventoryComponent implements OnInit {
   items:any = [];
   itemDetails:any = [];
-
+  itemName:any;
   //pages and nr of items per page stored
   pager:any = {};
   pagedItems:any = [];

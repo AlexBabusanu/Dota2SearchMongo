@@ -3,6 +3,7 @@ const cors = require("cors");
 const app = express();
 const mongo = require("mongodb").MongoClient;
 const openid = require("openid");
+const path = require("path");
 
 //MongoDB database
 const url = "mongodb://skidi:mercury@dota2search-shard-00-00-odko1.mongodb.net:27017,dota2search-shard-00-01-odko1.mongodb.net:27017,dota2search-shard-00-02-odko1.mongodb.net:27017/test?ssl=true&replicaSet=Dota2Search-shard-0&authSource=admin&retryWrites=true";
@@ -25,6 +26,8 @@ app.use(cors({
     'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
     'preflightContinue': false
 }));
+
+app.use(express.static(path.join(__dirname, 'dist')));
 
 //Authenticate OpenId
 app.get("/auth", (req, res) => {    
@@ -55,7 +58,7 @@ app.get("/verify", (req, res) => {
         }
         else {
            steamId = result.claimedIdentifier.replace('https://steamcommunity.com/openid/id/', '');           
-           res.redirect('http://localhost:4200/'+ steamId);
+           res.redirect('/'+ steamId);
         }
     })
 })
@@ -87,6 +90,10 @@ app.get("/checkString", (req, res)=> {
         })
     });
     
+})
+
+app.get("*", (req, res)=> {
+    res.sendFile(path.join(__dirname, 'dist/index.html'));
 })
 
 //create server;

@@ -63,16 +63,11 @@ export class FriendListComponent implements OnInit {
     }
     this.steamApi.getItemThatContains(itemName).subscribe(
       (res) => {
-        console.log(res[0]);
-          for(let x = 0; x<5; x++){
-            if(res[x]){
-              this.items.push(res[x]);
-            }
-            
-          }
-        
-        
-        console.log(res);
+        for(let x = 0; x<5; x++){
+          if(res[x]){
+            this.items.push(res[x]);
+          }  
+        }  
         Object.keys(res).map(key => {         
           for(let friend of this.friends){
             if(friend.inventory.findIndex(x => x.defindex == res[key]["id"]) != "-1"){

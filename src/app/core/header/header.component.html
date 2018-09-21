@@ -3,7 +3,7 @@
   <div class="links">
     <div>
         <div class="logo">
-          <span *ngIf="!user"><a [routerLink]="['']">Dota2Search</a></span>
+          <span *ngIf="!user"><a [routerLink]="['']">Dota2Inventory</a></span>
           <span *ngIf="user"><a (click)="goTo()"><img [src]="user.avatar">{{user.username}}</a></span>
         </div>
       </div>

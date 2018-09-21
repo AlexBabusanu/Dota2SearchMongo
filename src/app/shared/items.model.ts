@@ -10,8 +10,10 @@ export class Item {
         this.name = details.name;
         this.image = (details.image_alt1 === "http://cdn.dota2.com/apps/570/" ? details.image_alt2 : details.image_alt1 );
         this.rarity = details.item_rarity;
-        this.type = details.prefab;
-        this.hero = (details.used_by_heroes === 1? "" : details.used_by_heroes);
+        this.type = details.prefab.replace("_", " ");
+        this.hero = (details.used_by_heroes === 1? "" : details.used_by_heroes.replace("npc_dota_hero_", "").replace("_", " "));
         this.slot = details.item_slot;
     }
+
+
 }
