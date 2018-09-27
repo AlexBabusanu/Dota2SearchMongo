@@ -9,6 +9,7 @@ import { CommonModule } from "@angular/common";
 import { SteamService } from "../shared/steamApi.service";
 import { PageService } from "../shared/pagination.service";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
     declarations:[
@@ -16,7 +17,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
         HomeComponent,
         UserComponent,
         FriendListComponent,
-        InventoryComponent
+        InventoryComponent,
+        FooterComponent
     ],
     imports:[
         AppRouter,
@@ -25,7 +27,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
         ReactiveFormsModule
     ],
     exports:[
-        HeaderComponent
+        HeaderComponent,
+        FooterComponent
     ],
     providers: [
         SteamService,

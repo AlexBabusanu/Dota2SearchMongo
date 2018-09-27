@@ -1,18 +1,23 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const mongo = require("mongodb").MongoClient;
+const mysql = require("mysql");
 const openid = require("openid");
 const path = require("path");
 
-//MongoDB database
-const url = "mongodb://skidi:mercury@dota2search-shard-00-00-odko1.mongodb.net:27017,dota2search-shard-00-01-odko1.mongodb.net:27017,dota2search-shard-00-02-odko1.mongodb.net:27017/test?ssl=true&replicaSet=Dota2Search-shard-0&authSource=admin&retryWrites=true";
+//Mysql database
+const connection = mysql.createPool({
+    host:"localhost",
+    user:"skidi",
+    password:"mercury88",
+    database:"dota2inventory"
+});
 
 
 //OpenID settings
 const relyingParty = new openid.RelyingParty(
-    "http://localhost:3000/verify",
-    "http://localhost:3000",
+    "http://Dota2Inventory.com/verify",
+    "http://Dota2Inventory.com",
     true,
     true,
     []
@@ -63,38 +68,29 @@ app.get("/verify", (req, res) => {
     })
 })
 
-//retrieve dota2items from mongo DB
-app.get("/mongo", (req, res) => {
-    mongo.connect(url, { useNewUrlParser: true }, function(err, db) {
-        if (err) throw err;
-        const dbo = db.db("mydb");
-        let sanitized = parseInt(req.query.itemIndex);
-        dbo.collection("Dota2Items").findOne({id: Number(sanitized)} ,function(err, result){
-            res.send(result);
-            db.close();
-        })
-    });
-    
+//retrieve dota2items from mysql DB
+app.get("/mysql", (req, res) => {
+    let sanitized = parseInt(req.query.itemIndex);
+    connection.query("Select * from dota2items WHERE id = " + sanitized, (err, result)=>{
+        if(err) throw err;
+        res.send(result);               
+    });          
 })
 
 //check items that contain string
-app.get("/checkString", (req, res)=> {
-    mongo.connect(url, {useNewUrlParser: true}, function(err, db){
+app.get("/checkString", (req, res)=> {  
+    let escaped = req.query.itemString.replace(/[^\w\s]/g, '');
+            
+    connection.query("Select * from dota2items WHERE name LIKE " + "'%" + escaped + "%'", (err, response) => {
         if(err) throw err;
-        const dbo = db.db("mydb");
-        let escaped = req.query.itemString.replace(/[^\w\s]/g, '');
-        const regex = new RegExp( escaped, "i");
-        dbo.collection("Dota2Items").find({"name": regex}).toArray(function(err, response){
-            if(err) throw err;
-            res.send(response);
-        })
-    });
-    
+        res.send(response);
+    });    
 })
 
 app.get("*", (req, res)=> {
     res.sendFile(path.join(__dirname, 'dist/index.html'));
 })
+
 
 //create server;
 const port = 3000;

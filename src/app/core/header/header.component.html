@@ -14,7 +14,7 @@
           <li *ngIf="mainUser">
               <a [routerLink]="[user.steamId]">Friends List</a>
           </li>
-          <li *ngIf="logged"><button (click)="logout()">Logout</button></li>
+          <li *ngIf="logged"><a (click)="logout()">Logout</a></li>
         </ul>
       </div>
   </div>

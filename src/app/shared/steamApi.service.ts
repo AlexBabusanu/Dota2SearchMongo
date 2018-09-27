@@ -51,15 +51,15 @@ export class SteamService {
 
     //get items that property name contains string
     getItemThatContains(string){
-        return this.http.get("http://localhost:3000/checkString", {params: {itemString: string}});
+        return this.http.get("http://Dota2Inventory.com/checkString", {params: {itemString: string}});
     }
     //get specific item
     getItem(index){
-        return this.http.get("http://localhost:3000/mongo", {params: {itemIndex: index}});
+        return this.http.get("http://localhost:3000/mysql", {params: {itemIndex: index}});        
     }
 
     login(){
-        return this.http.get("http://localhost:3000/auth");
+        return this.http.get("http://Dota2Inventory.com/auth");
     }
 
 }

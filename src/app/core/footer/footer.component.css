@@ -1,0 +1,14 @@
+.text {
+    z-index:5;
+    position:relative;
+    display:flex;
+    justify-content: space-between;
+    color:#fff;
+    padding:0 15px;
+    background:#000;
+}
+
+.text a {
+    text-decoration: underline;
+    color:green;
+}
