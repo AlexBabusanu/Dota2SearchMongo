@@ -36,6 +36,6 @@ export class HomeComponent implements OnInit {
   }
 
   steam(){
-    window.location.href = "http://Dota2Inventory.com/auth";
+    window.location.href = "https://Dota2Inventory.com/auth";
   }
 }

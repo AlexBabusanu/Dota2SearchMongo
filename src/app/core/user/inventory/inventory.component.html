@@ -1,17 +1,18 @@
 <div class="inventory">
-    <label>Search for Item</label>
-    <input name="itemName" type="text" placeholder="Search Item" [formControl]="inputName">
+    <input name="itemName" type="text" placeholder="Search for item" [formControl]="inputName">
     <div class="container" *ngIf="itemName !== ''">
       <li *ngFor="let i of array">
         <img [src]="i.image_inventory">{{i.name}}
       </li>
     </div>
   <ul class="inv">
+    <div *ngIf="!itemDetails">No items found :(</div>
     <li *ngFor="let item of itemDetails">
       <div class="item card">
        <a [routerLink]="item.index">
         <img 
         [src]="item.image" 
+        [alt]="item.name"
         [ngClass]="{
           'common': !item.rarity,
           'uncommon': item.rarity === 'uncommon',

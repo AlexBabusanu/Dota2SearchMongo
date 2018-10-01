@@ -5,7 +5,7 @@
   
     <div class="error" *ngIf="error" [innerHTML]="error.error"> </div>
     <div class="search">
-        <input name="itemName" type="text" placeholder="Search inventories for item" [formControl]="inputName" pattern="[a-zA-Z0-9\s]+" minlength="1" maxlength="50" >
+        <input name="itemName" type="text" placeholder="Search all inventories" [formControl]="inputName" pattern="[a-zA-Z0-9\s]+" minlength="1" maxlength="50" >
         <div class="container" *ngIf="items.length > 0">
           <li *ngFor="let i of items">
             <a (click)="setSearch(i.name)"><img [src]="i.image_alt1">{{i.name}}</a>
@@ -14,6 +14,7 @@
     </div>
     <div class="center">
       <ul>
+        <div *ngIf="!friends">No friends found :(</div>
           <li *ngFor="let friend of friends" [class.hasItem]="friend.hasItem"> 
             <a [routerLink]="['inventory', friend.steamId]" >
               <img [src]="friend.avatar" > {{ friend.username }} 

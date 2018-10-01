@@ -27,17 +27,17 @@ export class SteamService {
 
     //get user details
     getDetails(steamId){
-        return  this.http.get("https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key=" + this.apiKey + "&steamids=" + steamId);
+        return this.http.get("https://Dota2Inventory.com/getDetails", {params:{steamId: steamId}});
     }
     //get player inventory details
     getInventory(steamId) {
-        return this.http.get("http://api.steampowered.com/IEconItems_570/GetPlayerItems/v0001/?key=" + this.apiKey + "&steamid=" + steamId);
+        return this.http.get("https://Dota2Inventory.com/getInventory", {params:{steamId: steamId}});
     }
 
     //get list of friends
     getFriends(steamId) {
-        return this.http.get("https://api.steampowered.com/ISteamUser/GetFriendList/v1/?key=" + this.apiKey + "&steamid=" + steamId).pipe(
-            mergeMap(
+        return this.http.get("https://Dota2Inventory.com/getFriendList", {params:{steamId: steamId}}).pipe(
+        mergeMap(
                 (res) => {                    
                     let friends = [];
                     for (let friend of res["friendslist"].friends){
@@ -51,15 +51,15 @@ export class SteamService {
 
     //get items that property name contains string
     getItemThatContains(string){
-        return this.http.get("http://Dota2Inventory.com/checkString", {params: {itemString: string}});
+        return this.http.get("https://Dota2Inventory.com/checkString", {params: {itemString: string}});
     }
     //get specific item
     getItem(index){
-        return this.http.get("http://localhost:3000/mysql", {params: {itemIndex: index}});        
+        return this.http.get("https://Dota2Inventory.com/mysql", {params: {itemIndex: index}});        
     }
 
     login(){
-        return this.http.get("http://Dota2Inventory.com/auth");
+        return this.http.get("https://Dota2Inventory.com/auth");
     }
 
 }

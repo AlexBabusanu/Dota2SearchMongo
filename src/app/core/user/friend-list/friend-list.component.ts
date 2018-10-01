@@ -36,10 +36,8 @@ export class FriendListComponent implements OnInit {
     this.steamApi.getFriends(this.route.snapshot.params.id).subscribe(
       (res) => {
         for (let friend of res) {          
-          if (friend) {
-            
-            let modeledFriend = new UserModel(friend);
-           
+          if (friend) {            
+            let modeledFriend = new UserModel(friend);           
             this.friends.push(modeledFriend);            
           }
         }

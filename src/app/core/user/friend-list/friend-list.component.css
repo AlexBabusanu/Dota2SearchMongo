@@ -52,6 +52,9 @@ li {
 .container {
     background:#fff;
 }
+.container li {
+    cursor: pointer;
+}
 
 .loading {
     position: fixed;

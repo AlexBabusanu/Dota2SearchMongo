@@ -4,6 +4,10 @@ const app = express();
 const mysql = require("mysql");
 const openid = require("openid");
 const path = require("path");
+const request = require("request");
+
+
+const apiKey = "BD496BFA7696FD5DE7D3FF190B371B1B";
 
 //Mysql database
 const connection = mysql.createPool({
@@ -16,8 +20,8 @@ const connection = mysql.createPool({
 
 //OpenID settings
 const relyingParty = new openid.RelyingParty(
-    "http://Dota2Inventory.com/verify",
-    "http://Dota2Inventory.com",
+    "https://Dota2Inventory.com/verify",
+    "https://Dota2Inventory.com",
     true,
     true,
     []
@@ -77,14 +81,59 @@ app.get("/mysql", (req, res) => {
     });          
 })
 
+app.get("/getDetails", (req, res) => {
+    let steamId = req.query.steamId;
+    let url = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key=" + apiKey + "&steamids=" + steamId;
+    request({
+        uri: url
+    }, (err, resp, body)=> {
+        if (!err && resp.statusCode === 200) {
+            res.send(body);
+          } else {
+            res.json(err);
+          }
+    })
+
+});
+app.get("/getInventory", (req, res) => {
+    let steamId = req.query.steamId;
+    let url = "http://api.steampowered.com/IEconItems_570/GetPlayerItems/v0001/?key=" + apiKey + "&steamid=" + steamId;
+    request({
+        uri: url
+    }, (err, resp, body)=> {
+        if (!err && resp.statusCode === 200) {
+            res.send(body);
+          } else {
+            res.json(err);
+          }
+    })
+
+});
+app.get("/getFriendList", (req, res) => {
+    let steamId = req.query.steamId;
+    let url = "http://api.steampowered.com/ISteamUser/GetFriendList/v1/?key=" + apiKey + "&steamid=" + steamId;
+    request({
+        uri: url
+    }, (err, resp, body)=> {
+        if (!err && resp.statusCode === 200) {
+            res.send(body);
+          } else {
+            res.json(err);
+          }
+    })
+
+});
+
 //check items that contain string
 app.get("/checkString", (req, res)=> {  
     let escaped = req.query.itemString.replace(/[^\w\s]/g, '');
             
     connection.query("Select * from dota2items WHERE name LIKE " + "'%" + escaped + "%'", (err, response) => {
         if(err) throw err;
+        console.log(response);
         res.send(response);
     });    
+    
 })
 
 app.get("*", (req, res)=> {

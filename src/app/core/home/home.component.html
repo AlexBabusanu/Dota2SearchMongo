@@ -1,8 +1,7 @@
 <div class="main">
   <div class="grid">
-      <button class="steamLogin" (click)="steam()"><img src="https://www.nulledteam.com/data/MetaMirrorCache/www.tf2wh.com_img_sits.png"></button> 
-      <h2>or</h2>
-      <div>
+      <button class="steamLogin" (click)="steam()"><img src="../../../assets/steamLogin.png"></button> 
+      <div class="input">
           <input name="steamId" (keydown.enter)="submit($event)"  class="form-control" placeholder="Manually insert steamID"  [(ngModel)]="steamID" required pattern=[0-9]{17} #steamId=ngModel>
           <div class="error" *ngIf="steamId.errors?.required && steamId.touched">Steam ID is required.</div>
           <div class="error" *ngIf="steamId.errors?.pattern && steamId.dirty">ID must be 17 char long and only numbers.</div>
