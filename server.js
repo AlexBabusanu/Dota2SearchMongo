@@ -130,7 +130,6 @@ app.get("/checkString", (req, res)=> {
             
     connection.query("Select * from dota2items WHERE name LIKE " + "'%" + escaped + "%'", (err, response) => {
         if(err) throw err;
-        console.log(response);
         res.send(response);
     });    
     

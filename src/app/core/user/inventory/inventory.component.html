@@ -1,10 +1,13 @@
 <div class="inventory">
-    <input name="itemName" type="text" placeholder="Search for item" [formControl]="inputName">
-    <div class="container" *ngIf="itemName !== ''">
-      <li *ngFor="let i of array">
-        <img [src]="i.image_inventory">{{i.name}}
-      </li>
-    </div>
+  <div class="topBar">
+      <input name="itemName" type="text" placeholder="Search for item" [formControl]="inputName">
+      <div class="container" *ngIf="itemName !== ''">
+        <li *ngFor="let i of array">
+          <img [src]="i.image_inventory">{{i.name}}
+        </li>
+      </div>
+      <div class="username" *ngIf="user"><img [src]="user.avatar"><h2>{{user.username}}'s inventory</h2></div>
+  </div>
   <ul class="inv">
     <div *ngIf="!itemDetails">No items found :(</div>
     <li *ngFor="let item of itemDetails">

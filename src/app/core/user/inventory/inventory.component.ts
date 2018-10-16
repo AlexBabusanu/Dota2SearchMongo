@@ -5,6 +5,7 @@ import { PageService } from '../../../shared/pagination.service';
 import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { Item } from '../../../shared/items.model';
+import { UserModel } from 'src/app/shared/users.model';
 
 @Component({
   selector: 'app-inventory',
@@ -12,6 +13,7 @@ import { Item } from '../../../shared/items.model';
   styleUrls: ['./inventory.component.css']
 })
 export class InventoryComponent implements OnInit {
+  user:any;
   items:any = [];
   itemDetails:any = [];
   itemName:any;
@@ -28,9 +30,13 @@ export class InventoryComponent implements OnInit {
     this.inputName.valueChanges.pipe(debounceTime(500)).subscribe(
       (val) => this.search(val.toLowerCase())
     )
-    this.steamApi.getInventory(this.root.snapshot.params.id).subscribe(
-      (res) => {        
-        for(let item of res["result"]["items"]){
+    
+    this.steamApi.userSteam(this.root.snapshot.params.id).subscribe(
+      (res) => { 
+        let userModeled = new UserModel(res);
+        this.user = userModeled;
+        console.log(this.user);
+        for(let item of res["inventory"]["result"]["items"]){
           this.items.push(item);
         }
       },

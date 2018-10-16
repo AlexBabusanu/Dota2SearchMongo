@@ -10,6 +10,16 @@ h4 {
     color:#fff;
     min-height:100vh;
 }
+.topBar {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:0 15px;
+}
+.username {
+    display:flex;
+    align-items:center;
+}
 a {
     display:grid;
     grid-template-rows: max-content;
